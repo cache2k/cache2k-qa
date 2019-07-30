@@ -35,6 +35,7 @@
     <module>java8</module>
     <module>spring-boot-test</module>
     <module>spring-boot-jcache-test</module>
+    <module>spring-boot-multiple-context-test</module>
     <module>datanucleus-jdo-jcache-test</module>
   </modules>
 
