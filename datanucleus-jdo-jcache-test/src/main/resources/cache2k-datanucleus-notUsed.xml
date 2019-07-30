@@ -1,0 +1,11 @@
+<cache2k>
+  <!-- may configure the two datanucleus caches. -->
+  <caches>
+    <cache>
+      <name>datanucleus</name>
+    </cache>
+    <cache>
+      <name>datanucleusUNIQUE</name>
+    </cache>
+  </caches>
+</cache2k>

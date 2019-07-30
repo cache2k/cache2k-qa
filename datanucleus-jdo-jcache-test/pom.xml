@@ -1,0 +1,238 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+
+   <parent>
+        <groupId>com.headissue.internal.cache2k-qa</groupId>
+        <artifactId>cache2k-qa</artifactId>
+        <version>0.1-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
+    </parent>
+
+    <artifactId>datanucleus-jdo-jcache-test</artifactId>
+    <name>cache2k QA - datanucleus JDO JCache test</name>
+
+
+    <properties>
+        <encoding>UTF-8</encoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-core</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-api-jdo</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>javax.jdo</artifactId>
+            <version>[3.2.0-m5, )</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>[1.2, 1.3)</version>
+        </dependency>
+
+        <!-- ENABLE THIS FOR H2 -->
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-rdbms</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>com.h2database</groupId>
+            <artifactId>h2</artifactId>
+            <version>1.3.168</version>
+        </dependency>
+
+        <!-- for JCache cache2k L2 caching -->
+        <dependency>
+            <groupId>javax.cache</groupId>
+            <artifactId>cache-api</artifactId>
+            <version>1.1.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.cache2k</groupId>
+            <artifactId>cache2k-core</artifactId>
+            <version>${cache2k-version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.cache2k</groupId>
+            <artifactId>cache2k-jcache</artifactId>
+            <version>${cache2k-version}</version>
+        </dependency>
+
+        <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>4.12</version>
+        <scope>test</scope>
+      </dependency>
+
+      <!-- ENABLE THIS FOR HSQLDB -->
+        <!--dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-rdbms</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>1.8.0.4</version>
+        </dependency-->
+
+        <!-- ENABLE THIS FOR MYSQL -->
+        <!--dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-rdbms</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.17</version>
+        </dependency-->
+
+        <!-- ENABLE THIS FOR ODF -->
+        <!--dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-odf</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.odftoolkit</groupId>
+            <artifactId>odfdom-java</artifactId>
+            <version>0.8.7</version>
+        </dependency>
+        <dependency>
+            <groupId>xerces</groupId>
+            <artifactId>xercesImpl</artifactId>
+            <version>[2.8, 3.0)</version>
+        </dependency-->
+
+        <!-- ENABLE THIS FOR EXCEL -->
+        <!--dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-excel</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.poi</groupId>
+            <artifactId>poi</artifactId>
+            <version>3.6</version>
+        </dependency-->
+
+        <!-- ENABLE THIS FOR MongoDB -->
+        <!--dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-mongodb</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.mongodb</groupId>
+            <artifactId>mongo-java-driver</artifactId>
+            <version>3.0.0</version>
+        </dependency-->
+
+        <!-- ENABLE THIS FOR HBase -->
+        <!--dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-hbase</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.hbase</groupId>
+            <artifactId>hbase-client</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-logging</groupId>
+            <artifactId>commons-logging</artifactId>
+            <version>1.1</version>
+        </dependency-->
+
+        <!-- ENABLE THIS FOR Neo4j -->
+        <!--dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-neo4j</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j</artifactId>
+            <version>2.3.0</version>
+        </dependency-->
+
+        <!-- ENABLE THIS FOR Cassandra -->
+        <!--dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-cassandra</artifactId>
+            <version>[5.0.0-m1, 5.9)</version>
+        </dependency>
+        <dependency>
+            <groupId>com.datastax.cassandra</groupId>
+            <artifactId>cassandra-driver-core</artifactId>
+            <version>3.0.2</version>
+        </dependency-->
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>2.5</version>
+                <configuration>
+                    <filesets>
+                        <fileset>
+                            <directory>${basedir}</directory>
+                            <includes>
+                                <include>*.log</include>
+                                <include>tutorial.ods</include>
+                                <include>tutorial.xls</include>
+                            </includes>
+                        </fileset>
+                        <fileset>
+                            <directory>${basedir}/testDB</directory>
+                        </fileset>
+                    </filesets>
+                </configuration>
+            </plugin>
+            <plugin>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>2.3.2</version>
+            </plugin>
+            <plugin>
+                <groupId>org.datanucleus</groupId>
+                <artifactId>datanucleus-maven-plugin</artifactId>
+                <version>5.0.0-release</version>
+                <configuration>
+                    <api>JDO</api>
+                    <persistenceUnitName>Tutorial</persistenceUnitName>
+                    <log4jConfiguration>${basedir}/log4j-enhancer.properties</log4jConfiguration>
+                    <verbose>false</verbose>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>enhance</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

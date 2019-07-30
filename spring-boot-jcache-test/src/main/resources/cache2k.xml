@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cache2k>
+  <version>1.0</version>
+  <ignoreMissingCacheConfiguration>true</ignoreMissingCacheConfiguration>
+
+  <defaults>
+    <cache>
+      <entryCapacity>2000</entryCapacity>
+      <loaderThreadCount>5</loaderThreadCount>
+    </cache>
+  </defaults>
+  <caches>
+    <cache>
+      <name>othercountries</name>
+      <expireAfterWrite>47s</expireAfterWrite>
+      <sections>
+        <!-- The jcache tag is wired to the type org.cache2k.jcache.JCacheConfiguration
+             to make the configuration smaller and allow the content to be covered in the XSD schema
+             The tag name jcache is defined in CacheConfigurationProviderImpl.
+         -->
+        <jcache>
+          <copyAlwaysIfRequested>true</copyAlwaysIfRequested>
+        </jcache>
+      </sections>
+    </cache>
+  </caches>
+</cache2k>
