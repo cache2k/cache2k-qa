@@ -57,6 +57,8 @@ public class SimpleTest {
     org.apache.logging.log4j.Logger logger =
       org.apache.logging.log4j.LogManager.getLogger("log2");
     checkThreads();
+
+
   }
 
   @Test
@@ -65,10 +67,7 @@ public class SimpleTest {
     org.apache.logging.log4j.Logger logger =
       org.apache.logging.log4j.LogManager.getLogger("log3");
     logger.debug("hello");
-    ((Closeable) logger).close();
     checkThreads();
   }
-
-
 
 }
