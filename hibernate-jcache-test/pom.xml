@@ -14,7 +14,7 @@
     <packaging>jar</packaging>
     <name>cache2k QA - hibernate jcache test</name>
     <description>
-      Test hibernate ORM JCache intergration with cache2k.
+      Test hibernate ORM JCache integration with cache2k.
     </description>
 
     <properties>
