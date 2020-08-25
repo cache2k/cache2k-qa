@@ -1,0 +1,21 @@
+<cache2k>
+  <version>1.0</version>
+  <!-- if enabled cache2k does not refuse operation in case there is
+       no configuration for a requested cache name -->
+  <ignoreMissingCacheConfiguration>true</ignoreMissingCacheConfiguration>
+  <defaults>
+    <!-- default settings for every cache -->
+    <cache>
+      <entryCapacity>100_000</entryCapacity>
+      <expireAfterWrite>5m</expireAfterWrite>
+    </cache>
+  </defaults>
+  <caches>
+    <cache>
+      <name>xml-hello</name>
+    </cache>
+    <cache>
+      <name>xml-hello2</name>
+    </cache>
+  </caches>
+</cache2k>
