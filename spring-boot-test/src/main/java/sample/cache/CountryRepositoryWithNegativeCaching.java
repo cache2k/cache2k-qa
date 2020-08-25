@@ -22,11 +22,17 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 @Component
-@CacheConfig(cacheNames = "loadingCountries", cacheResolver = "loadingCacheResolver")
-public class LoadingCountryRepository {
+@CacheConfig(cacheNames = "countries")
+public class CountryRepositoryWithNegativeCaching {
 
+	/**
+	 * Returns null if not a two letter country code, because then its not a valid country.
+	 */
 	@Cacheable
 	public Country findByCode(String code) {
+		if (code.length() != 2) {
+			return null;
+		}
 		// System.out.println("---> Loading country with code '" + code + "'");
 		return new Country(code);
 	}

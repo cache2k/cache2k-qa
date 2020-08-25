@@ -27,7 +27,7 @@ public class SampleCacheApplicationTest {
   private LoadingBySetupCountryRepository countryRepository;
 
   @Autowired
-  private LoadingCountryRepository loadingCountryRepository;
+  private CountryRepositoryWithNegativeCaching countryRepositoryWithNegativeCaching;
 
   @Autowired
   private LoadingBySetupCountryRepository loadingBySetupCountryRepository;
@@ -87,6 +87,12 @@ public class SampleCacheApplicationTest {
     } catch (CachingConfig.SpecialWrapException ex) {
       assertThat(ex.getCause()).isInstanceOf(CacheLoaderException.class);
     }
+  }
+
+  @Test
+  public void negativeCaching_nullSupport() {
+    Country country = countryRepositoryWithNegativeCaching.findByCode("123");
+    assertNull(country);
   }
 
 }
