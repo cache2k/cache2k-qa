@@ -4,6 +4,11 @@
 # dummy test that fails always.
 org.jsr107.tck.CachingTest#dummyTest
 
+# Failed tests, since cache2k 1.4, no get count if entry is not accessed, see cache2k documentation
+#  CacheMBStatisticsBeanTest.testCacheStatisticsInvokeEntryProcessorGet:511 expected:<2> but was:<1>
+#  CacheMBStatisticsBeanTest.testCacheStatisticsInvokeEntryProcessorNoOp:477 expected:<2> but was:<0>
+#  CacheMBStatisticsBeanTest.testCacheStatisticsInvokeEntryProcessorUpdate:535 expected:<1> but was:<0>
 
-
-
+org.jsr107.tck.management.CacheMBStatisticsBeanTest#testCacheStatisticsInvokeEntryProcessorGet
+org.jsr107.tck.management.CacheMBStatisticsBeanTest#testCacheStatisticsInvokeEntryProcessorNoOp
+org.jsr107.tck.management.CacheMBStatisticsBeanTest#testCacheStatisticsInvokeEntryProcessorUpdate
