@@ -28,7 +28,7 @@ public class SampleCacheApplicationTest {
 
   @Test
   public void knownCache() {
-    assertTrue(cacheManager.getCacheNames().contains("definedByXml"));
+    assertTrue(cacheManager.getCacheNames().contains("cacheDefinedByXml"));
   }
 
   @Test
