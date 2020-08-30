@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>spring-boot-autoconfig-test</artifactId>
-	<name>cache2k QA - spring boot with cache2k - advanced test</name>
+	<name>cache2k QA - Spring Boot with cache2k - autoconfig test</name>
 	<description>Experiment with Spring boot to provide a cache2k cache manager automatically</description>
 	<properties>
 		<spring.boot.version>2.3.2.RELEASE</spring.boot.version>

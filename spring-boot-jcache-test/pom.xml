@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>spring-boot-jcache-test</artifactId>
-	<name>cache2k QA - spring boot with JCache</name>
+	<name>cache2k QA - Spring Boot with JCache</name>
 	<description></description>
 	<properties>
 		<spring.boot.version>1.5.10.RELEASE</spring.boot.version>

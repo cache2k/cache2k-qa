@@ -10,7 +10,7 @@
 	</parent>
 
 	<artifactId>spring-boot-multiple-context-test</artifactId>
-	<name>cache2k QA - spring boot multiple context test</name>
+	<name>cache2k QA - Spring Boot multiple context test</name>
 	<description>
 		Spring Boot test with multiple applications contexts in tests to
 		show how to create separate cache managers to avoid conflicts
