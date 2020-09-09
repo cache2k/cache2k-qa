@@ -25,12 +25,14 @@ public class StackOverflow63752162Test {
       }
         .loader(new AdvancedCacheLoader<Long, ValueAndState<String>>() {
           @Override
-          public ValueAndState<String> load(Long key, long now, CacheEntry<Long, ValueAndState<String>> entry) {
+          public ValueAndState<String> load(Long key, long now,
+                                            CacheEntry<Long, ValueAndState<String>> oldEntry) {
             return new ValueAndState<>(
               realLoad(key),
-              entry != null && entry.getValue().updating);
+              oldEntry != null && oldEntry.getValue().updating);
           }
         })
+        .keepDataAfterExpired(true)
         .eternal(true)
         .expiryPolicy(
           (key, value, loadTime, oldEntry) ->
@@ -38,6 +40,7 @@ public class StackOverflow63752162Test {
         .build()
     );
     cw.startUpdate(123L);
+    assertEquals(0, loaderCalled.get());
     cw.cache.get(123L);
     cw.cache.get(123L);
     cw.cache.get(4711L);
@@ -83,7 +86,9 @@ public class StackOverflow63752162Test {
      */
     boolean startUpdate(K key) {
       return cache.invoke(key, (EntryProcessor<K, ValueAndState<V>, Boolean>) entry -> {
-        ValueAndState<V> v = entry.getValue();
+        // check whether entry is existing to avoid trigger a load
+        // we only need to load, if the data is actually read
+        ValueAndState<V> v = entry.exists() ? entry.getValue() : null;
         if (v != null) {
           if (v.updating) {
             return false;
