@@ -85,9 +85,11 @@ public class Main {
    */
   public void testWithExpiry() throws InterruptedException {
     long expireAfterWriteMillis = 100;
+    long timerLag = 123;
     Cache<String, Integer> cache = Cache2kBuilder.of(String.class, Integer.class)
       .entryCapacity(100)
       .sharpExpiry(true)
+      .timerLag(timerLag, TimeUnit.MILLISECONDS)
       .expiryPolicy(new ExpiryPolicy<String, Integer>() {
         @Override
         public long calculateExpiryTime(String key, Integer value, long loadTime, CacheEntry<String, Integer> oldEntry) {
@@ -107,7 +109,7 @@ public class Main {
     assertFalse("entry not visible, since expired", cache.containsKey("abc"));
     // removal of the cache entry happens a bit after expiry
     // this check whether the timer event is processed
-    long waitTime = 1000;
+    long waitTime = 1000 + timerLag;
     t0 = System.currentTimeMillis();
     while (cache.asMap().size() > 0 && System.currentTimeMillis() - t0 < waitTime) { }
     assertTrue("entry is removed after expiry", cache.asMap().size() == 0);
