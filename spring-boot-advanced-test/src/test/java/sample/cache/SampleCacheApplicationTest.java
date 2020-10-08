@@ -1,7 +1,6 @@
 package sample.cache;
 
 import io.micrometer.core.instrument.MeterRegistry;
-import io.micrometer.core.instrument.Metrics;
 import org.cache2k.extra.spring.SpringCache2kCacheManager;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -56,26 +55,6 @@ public class SampleCacheApplicationTest {
     assertTrue(c1 == c2);
     meterRegistry.get("cache.puts")
       .tag("cache", countriesWithUnconfiguredCache.CACHE_NAME).functionCounter();
-  }
-
-  /**
-   * The meter registry created by Spring is registered in the global composite registry.
-   * Every metric that is added to the global registry is visible within the spring meter registry
-   * but not the other way around.
-   */
-  @Test
-  public void globalRegistry() {
-    final String GLOBAL_METRIC_NAME = "counterInGlobalRegistry";
-    assertTrue(Metrics.globalRegistry.find(GLOBAL_METRIC_NAME).meters().isEmpty());
-    Metrics.counter(GLOBAL_METRIC_NAME);
-    assertFalse(Metrics.globalRegistry.find(GLOBAL_METRIC_NAME).meters().isEmpty());
-    assertFalse("metric added in global registry is visible in spring registry",
-      meterRegistry.find(GLOBAL_METRIC_NAME).meters().isEmpty());
-    final String SPRING_METRIC_NAME = "counterInSpringRegistry";
-    meterRegistry.counter(SPRING_METRIC_NAME);
-    assertTrue(
-      "Metric added in Spring registry not visible in global registry",
-      Metrics.globalRegistry.find(SPRING_METRIC_NAME).meters().isEmpty());
   }
 
 }

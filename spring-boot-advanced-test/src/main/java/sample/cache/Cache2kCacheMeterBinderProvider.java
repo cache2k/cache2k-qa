@@ -2,6 +2,7 @@ package sample.cache;
 
 import io.micrometer.core.instrument.Tag;
 import io.micrometer.core.instrument.binder.MeterBinder;
+import org.cache2k.extra.micrometer.Cache2kCacheMetrics;
 import org.cache2k.extra.spring.SpringCache2kCache;
 import org.springframework.boot.actuate.metrics.cache.CacheMeterBinderProvider;
 
@@ -20,8 +21,7 @@ public class Cache2kCacheMeterBinderProvider implements CacheMeterBinderProvider
 	public MeterBinder getMeterBinder(SpringCache2kCache cache, Iterable<Tag> tags) {
 		// System.err.println("STATS REQUESTED " + toString() + " " + cache.getName());
 		// Thread.dumpStack();
-		// return new Cache2kCacheMetrics(cache.getNativeCache(), tags);
-		return null;
+		return new Cache2kCacheMetrics(cache.getNativeCache(), tags);
 	}
 
 }

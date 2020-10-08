@@ -1,8 +1,11 @@
 package sample.cache;
 
 
+import io.micrometer.core.instrument.MeterRegistry;
+import org.cache2k.extra.micrometer.MicroMeterSupport;
 import org.cache2k.extra.spring.SpringCache2kCacheManager;
 import org.springframework.beans.factory.BeanNameAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.actuate.metrics.cache.CaffeineCacheMeterBinderProvider;
 import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
@@ -24,20 +27,30 @@ import java.util.concurrent.TimeUnit;
 @EnableCaching
 public class CachingConfig extends CachingConfigurerSupport  {
 
+  @Autowired MeterRegistry meterRegistry;
+
   @Bean
   public CacheManager dummyCacheManager() {
     // Thread.dumpStack();
     return new DummyCacheManager();
   }
 
+  /*
+     We can use the metric binder to bind to the meter registry.
+     Spring does only bind caches that are configured in the cache manager.
+     Alternatively we can set the meter registry in the cache2k manager and all created
+     caches will be registered.
+
   @Bean
   public Cache2kCacheMeterBinderProvider cache2kCacheMeterBinderProvider() {
     return new Cache2kCacheMeterBinderProvider();
   }
+  */
 
   @Bean
   public CacheManager cacheManager() {
     SpringCache2kCacheManager mgm = new SpringCache2kCacheManager();
+    mgm.getNativeCacheManager().getProperties().put(MicroMeterSupport.MICROMETER_REGISTRY_MANAGER_PROPERTY, meterRegistry);
     mgm.addCaches(
       b->b.name("loadingBySetupCountries").keyType(String.class).valueType(Country.class).loader(k -> new Country(k)),
       b->b.name("test1").expireAfterWrite(30, TimeUnit.SECONDS).entryCapacity(10000),

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @CacheConfig(cacheNames = CountryRepositoryWithUnconfiguredCache.CACHE_NAME)
 public class CountryRepositoryWithUnconfiguredCache {
 
-  public static final String CACHE_NAME = "contriesUnconfigured";
+  public static final String CACHE_NAME = "countriesUnconfigured";
 
   @Cacheable
   public Country findByCode(String code) {

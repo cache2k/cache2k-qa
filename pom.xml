@@ -6,7 +6,7 @@
   <packaging>pom</packaging>
   <version>0.1-SNAPSHOT</version>
   <name>cache2k QA</name>
-  <description>HEADISSUE CONFIDENTIAL - project with additional cache2k QA tests
+  <description>Project with additional cache2k QA tests
   </description>
 
   <url>https://cache2k.org</url>
@@ -25,7 +25,7 @@
   </developers>
   
   <properties>
-     <cache2k-version>1.3.6.Beta</cache2k-version>
+     <cache2k-version>1.5.2.Beta</cache2k-version>
      <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   
