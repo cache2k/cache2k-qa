@@ -72,9 +72,10 @@ public class SampleCacheApplicationTest {
 
   @Test
   public void exceptionFromLoader() {
+    String key = "ER";
     Cache countries = this.cacheManager.getCache(LoadingBySetupCountryRepository.CACHE_NAME);
     org.cache2k.Cache c2kCache = (org.cache2k.Cache) countries.getNativeCache();
-    c2kCache.invoke("ER", new EntryProcessor() {
+    c2kCache.invoke(key, new EntryProcessor() {
       @Override
       public Object process(final MutableCacheEntry e) throws Exception {
         e.setException(new IllegalAccessException());
@@ -82,7 +83,7 @@ public class SampleCacheApplicationTest {
       }
     });
     try {
-      Country be1 = this.loadingBySetupCountryRepository.findByCode("ER");
+      Country be1 = this.loadingBySetupCountryRepository.findByCode(key);
       fail("exception expected");
     } catch (CachingConfig.SpecialWrapException ex) {
       assertThat(ex.getCause()).isInstanceOf(CacheLoaderException.class);

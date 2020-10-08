@@ -26,7 +26,11 @@ public class CachingConfig extends CachingConfigurerSupport  {
   public CacheManager cacheManager() {
     return new SpringCache2kCacheManager()
       .addCaches(
-        b->b.name("loadingBySetupCountries").keyType(String.class).valueType(Country.class).loader(k -> new Country(k)),
+        b->b.name("loadingBySetupCountries")
+          .keyType(String.class).valueType(Country.class)
+          // expiry needed to cache exceptions
+          .expireAfterWrite(5, TimeUnit.MINUTES)
+          .loader(k -> new Country(k)),
         b->b.name("test1").expireAfterWrite(30, TimeUnit.SECONDS).entryCapacity(10000),
         b->b.name("anotherCache").entryCapacity(1000)
       );
