@@ -17,7 +17,7 @@ public class LambdaInvokeTest {
     Cache<String,String> cache = new Cache2kBuilder<String, String>() {}
       .build();
     cache.put("ABC", "123");
-    String s = cache.invoke("ABC", e -> e.remove().getOldValue());
+    String s = cache.invoke("ABC", e -> e.remove().getValue());
     assertEquals("123", s);
     assertFalse(cache.containsKey("ABC"));
     cache.close();
@@ -28,8 +28,8 @@ public class LambdaInvokeTest {
     Cache<String,String> cache = new Cache2kBuilder<String, String>() {}
       .build();
     cache.put("ABC", "123");
-    boolean _existing = cache.invoke("ABC", e -> e.remove().wasExisting());
-    assertTrue(_existing);
+    boolean exists = cache.invoke("ABC", e -> e.remove().exists());
+    assertTrue(exists);
     assertFalse(cache.containsKey("ABC"));
     cache.close();
   }
@@ -52,7 +52,7 @@ public class LambdaInvokeTest {
       .build();
     final String key = "abc";
     cache.put(key, "123");
-    long refreshedTime = cache.invoke(key, e -> e.getRefreshedTime());
+    long refreshedTime = cache.invoke(key, e -> e.getModificationTime());
   }
 
 }

@@ -3,9 +3,14 @@ import org.cache2k.Cache2kBuilder;
 import org.cache2k.CacheEntry;
 import org.cache2k.event.CacheEntryExpiredListener;
 import org.cache2k.integration.AdvancedCacheLoader;
+import org.junit.Test;
 
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -69,6 +74,28 @@ public class DynamicCacheGh124 {
 
 	private String getResourceInternal(String type, String id) {
 		return "xyz";
+	}
+
+	@Test
+	public void testCompletableFutureGet() throws InterruptedException {
+		Executor executor = Executors.newCachedThreadPool();
+		Thread t = new Thread(() -> {
+			while (!Thread.interrupted()) {
+				CompletableFuture<Void> future = new CompletableFuture<>();
+				executor.execute(() -> future.complete(null));
+				try {
+					future.get();
+				} catch (InterruptedException e) {
+					return;
+				} catch (ExecutionException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		t.start();
+		Thread.sleep(1000);
+		t.interrupt();
+		t.join();
 	}
 
 }
