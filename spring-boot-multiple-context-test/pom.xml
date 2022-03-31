@@ -16,7 +16,7 @@
 		show how to create separate cache managers to avoid conflicts
 	</description>
 	<properties>
-		<spring.boot.version>1.5.10.RELEASE</spring.boot.version>
+		<spring.boot.version>2.5.12</spring.boot.version>
 		<spring.version>5.0.3.RELEASE</spring.version>
 	</properties>
 	<dependencies>
